@@ -2,7 +2,7 @@ package dev.jmoore.fcapi.api;
 
 /**
  * @author Josh Moore <josh.moore@jmoore.dev> (https://tycrek.com)
- *
+ * <p>
  * Available currencies from the <a href="https://freeCurrencyCodeapi.com/docs/CurrencyCode-list">CurrencyCode List</a>.
  */
 public class CurrencyList {

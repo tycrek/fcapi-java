@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author Josh Moore <josh.moore@jmoore.dev> (https://tycrek.com)
- *
+ * <p>
  * Response implementation for <a href="https://freecurrencyapi.com/docs/latest">/latest</a>. *
  */
 @Data

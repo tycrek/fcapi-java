@@ -24,4 +24,11 @@ public class FcApi {
     public FcApi(String token) {
         this.token.set(token);
     }
+
+    /**
+     * @see <a href="https://freecurrencyapi.com/docs/status">/status</a>
+     */
+    public StatusResponse getStatus() throws IOException {
+        return GSON.fromJson(Http.GET(token.get(), Endpoints.STATUS), StatusResponse.class);
+    }
 }

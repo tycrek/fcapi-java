@@ -25,5 +25,11 @@ dependencies {
 }
 ```
 
+## Todo
+
+- [ ] Caching
+- [ ] Historical
+- [ ] Helper functions
+
 [Image]: https://jitpack.io/v/tycrek/fcapi-java.svg?style=flat-square
 [Jitpack]: https://jitpack.io/#tycrek/fcapi-java/

@@ -1,0 +1,10 @@
+before_install:
+  - source "$HOME/.sdkman/bin/sdkman-init.sh"
+  - sdk update
+  - sdk install java 17.0.5-oracle
+  - sdk use java 17.0.5-oracle
+  - chmod +x gradlew
+install:
+  - echo "Building Shadowjar"
+  - chmod +x ./gradlew
+  - ./gradlew shadowJar publishToMavenLocal

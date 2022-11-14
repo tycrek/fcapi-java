@@ -30,3 +30,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+// upgrade gradle to 7.5.1
+task upgradeWrapper(type: Wrapper) {
+    gradleVersion = '7.5.1'
+}

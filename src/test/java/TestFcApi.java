@@ -20,4 +20,49 @@ public class TestFcApi {
             System.exit(1);
         }
     }
+
+    @Test
+    public void testStatus() {
+        FcApi api = new FcApi(API_KEY);
+
+        try {
+            StatusResponse status = api.getStatus();
+            System.out.println(status);
+            System.out.printf("Remaining requests: %d%n", status.getQuotas().getMonth().getRemaining());
+            System.out.printf("Total requests: %d%n", status.getQuotas().getMonth().getTotal());
+            System.out.printf("Used requests: %d%n", status.getQuotas().getMonth().getUsed());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testCurrencies() {
+        FcApi api = new FcApi(API_KEY);
+
+        try {
+            CurrenciesResponse currencies = api.getCurrencies();
+            System.out.println(currencies);
+            System.out.printf("JPY: %s%n", currencies.getData().getJPY().getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testSpecificCurrencies() {
+        FcApi api = new FcApi(API_KEY);
+
+        try {
+            CurrenciesResponse currencies = api.getCurrencies(CurrencyList.AUD, CurrencyList.CAD, CurrencyList.EUR, CurrencyList.USD);
+            System.out.println(currencies);
+            System.out.printf("AUD: %s%n", currencies.getData().getAUD().getName());
+            System.out.printf("CAD: %s%n", currencies.getData().getCAD().getName());
+            System.out.printf("EUR: %s%n", currencies.getData().getEUR().getName());
+            System.out.printf("USD: %s%n", currencies.getData().getUSD().getName());
+            System.out.printf("JPY: %s%n", currencies.getData().getJPY().getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

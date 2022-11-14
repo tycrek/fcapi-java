@@ -1,6 +1,7 @@
 import dev.jmoore.fcapi.FcApi;
 import dev.jmoore.fcapi.api.CurrencyList;
 import dev.jmoore.fcapi.api.responses.CurrenciesResponse;
+import dev.jmoore.fcapi.api.responses.LatestResponse;
 import dev.jmoore.fcapi.api.responses.StatusResponse;
 import org.junit.Test;
 
@@ -61,6 +62,35 @@ public class TestFcApi {
             System.out.printf("EUR: %s%n", currencies.getData().getEUR().getName());
             System.out.printf("USD: %s%n", currencies.getData().getUSD().getName());
             System.out.printf("JPY: %s%n", currencies.getData().getJPY().getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testLatest() {
+        FcApi api = new FcApi(API_KEY);
+
+        try {
+            LatestResponse latest = api.getLatest();
+            System.out.println(latest);
+            System.out.printf("EUR: %f%n", latest.getData().getEUR());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testLatestDifferentBases() {
+        FcApi api = new FcApi(API_KEY);
+
+        try {
+            LatestResponse latestDefault = api.getLatest();
+            LatestResponse latestCadDef = api.getLatest(CurrencyList.CAD);
+            System.out.println(latestDefault);
+            System.out.println(latestCadDef);
+            System.out.printf("EUR/USD: %f%n", latestDefault.getData().getEUR());
+            System.out.printf("EUR/CAD: %f%n", latestCadDef.getData().getEUR());
         } catch (Exception e) {
             e.printStackTrace();
         }

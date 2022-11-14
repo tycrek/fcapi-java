@@ -31,4 +31,30 @@ public class FcApi {
     public StatusResponse getStatus() throws IOException {
         return GSON.fromJson(Http.GET(token.get(), Endpoints.STATUS), StatusResponse.class);
     }
+
+    /**
+     * @see <a href="https://freecurrencyapi.com/docs/currencies">/currencies</a>
+     */
+    public CurrenciesResponse getCurrencies() throws IOException {
+        return getCurrencies(new CurrencyCode[0]);
+    }
+
+    /**
+     * @see <a href="https://freecurrencyapi.com/docs/currencies">/currencies</a>
+     * @param currencies Optional currencies to filter by. Note that ALL currencies will be returned, though if not specified, will return `null` when accessed.
+     */
+    public CurrenciesResponse getCurrencies(CurrencyCode... currencies) throws IOException {
+        var endpoint = Endpoints.CURRENCIES;
+        if (currencies.length > 0) {
+            endpoint = endpoint.concat("?currencies=");
+
+            for (var currency : currencies)
+                endpoint = endpoint.concat(currency.getCode()).concat(",");
+
+            // Remove trailing comma
+            endpoint = endpoint.substring(0, endpoint.length() - 1);
+        }
+
+        return GSON.fromJson(Http.GET(token.get(), endpoint), CurrenciesResponse.class);
+    }
 }

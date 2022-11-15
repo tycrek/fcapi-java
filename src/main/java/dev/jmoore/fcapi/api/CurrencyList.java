@@ -1,10 +1,15 @@
 package dev.jmoore.fcapi.api;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Josh Moore <josh.moore@jmoore.dev> (https://tycrek.com)
  * <p>
  * Available currencies from the <a href="https://freeCurrencyCodeapi.com/docs/CurrencyCode-list">CurrencyCode List</a>.
  */
+@SuppressWarnings("unused")
 public class CurrencyList {
     public static final CurrencyCode EUR = new CurrencyCode("EUR", "Euro");
     public static final CurrencyCode USD = new CurrencyCode("USD", "US Dollar");
@@ -39,4 +44,19 @@ public class CurrencyList {
     public static final CurrencyCode SGD = new CurrencyCode("SGD", "Singapore Dollar");
     public static final CurrencyCode THB = new CurrencyCode("THB", "Thai Baht");
     public static final CurrencyCode ZAR = new CurrencyCode("ZAR", "South African Rand");
+    private static final Map<String, CurrencyCode> CURRENCY_MAP = new HashMap<>();
+
+    static {
+        // Quickly populate the map using reflection
+        for (Field field : CurrencyList.class.getFields())
+            try {
+                var currencyCode = (CurrencyCode) field.get(null);
+                CURRENCY_MAP.put(currencyCode.getCode(), currencyCode);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                System.exit(1);
+            } catch (ClassCastException e) {
+                // Ignore (not a CurrencyCode)
+            }
+    }
 }

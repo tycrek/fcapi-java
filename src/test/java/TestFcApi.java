@@ -1,15 +1,17 @@
 import dev.jmoore.fcapi.FcApi;
 import dev.jmoore.fcapi.api.CurrencyList;
+import dev.jmoore.fcapi.api.InvalidCurrencyException;
 import dev.jmoore.fcapi.api.responses.CurrenciesResponse;
 import dev.jmoore.fcapi.api.responses.LatestResponse;
 import dev.jmoore.fcapi.api.responses.StatusResponse;
+import lombok.SneakyThrows;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-
+// todo: properly implement junit assertions
 public class TestFcApi {
     static String API_KEY;
 
@@ -19,6 +21,21 @@ public class TestFcApi {
         } catch (IOException e) {
             System.err.printf("Failed to read API key from file: %s%n", e.getMessage());
             System.exit(1);
+        }
+    }
+
+    @Test
+    @SneakyThrows
+    public void testCurrencyListGetCodeSuccessful() {
+        System.out.println(CurrencyList.getCode("USD").toString());
+    }
+
+    @Test
+    public void testCurrencyListGetCodeFailure() {
+        try {
+            CurrencyList.getCode("USDD");
+        } catch (InvalidCurrencyException e) {
+            System.out.println("Caught expected exception: " + e.getMessage());
         }
     }
 

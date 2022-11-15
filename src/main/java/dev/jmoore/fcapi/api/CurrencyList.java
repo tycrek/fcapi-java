@@ -59,4 +59,15 @@ public class CurrencyList {
                 // Ignore (not a CurrencyCode)
             }
     }
+
+    /**
+     * Gets a {@link CurrencyCode} from a String. Useful for converting user input to a {@link CurrencyCode}.
+     *
+     * @throws InvalidCurrencyException if the currency code is invalid.
+     */
+    public static CurrencyCode getCode(String code) throws InvalidCurrencyException {
+        if (!CURRENCY_MAP.containsKey(code))
+            throw new InvalidCurrencyException(String.format("Currency code '%s' is not valid.", code));
+        return CURRENCY_MAP.get(code);
+    }
 }

@@ -27,7 +27,7 @@ public class TestFcApi {
         FcApi api = new FcApi(API_KEY);
 
         try {
-            StatusResponse status = api.getStatus();
+            StatusResponse status = api.getWrapper().getStatus();
             System.out.println(status);
             System.out.printf("Remaining requests: %d%n", status.getQuotas().getMonth().getRemaining());
             System.out.printf("Total requests: %d%n", status.getQuotas().getMonth().getTotal());
@@ -42,7 +42,7 @@ public class TestFcApi {
         FcApi api = new FcApi(API_KEY);
 
         try {
-            CurrenciesResponse currencies = api.getCurrencies();
+            CurrenciesResponse currencies = api.getWrapper().getCurrencies();
             System.out.println(currencies);
             System.out.printf("JPY: %s%n", currencies.getData().getJPY().getName());
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class TestFcApi {
         FcApi api = new FcApi(API_KEY);
 
         try {
-            CurrenciesResponse currencies = api.getCurrencies(CurrencyList.AUD, CurrencyList.CAD, CurrencyList.EUR, CurrencyList.USD);
+            CurrenciesResponse currencies = api.getWrapper().getCurrencies(CurrencyList.AUD, CurrencyList.CAD, CurrencyList.EUR, CurrencyList.USD);
             System.out.println(currencies);
             System.out.printf("AUD: %s%n", currencies.getData().getAUD().getName());
             System.out.printf("CAD: %s%n", currencies.getData().getCAD().getName());
@@ -72,7 +72,7 @@ public class TestFcApi {
         FcApi api = new FcApi(API_KEY);
 
         try {
-            LatestResponse latest = api.getLatest();
+            LatestResponse latest = api.getWrapper().getLatest();
             System.out.println(latest);
             System.out.printf("EUR: %f%n", latest.getData().getEUR());
         } catch (Exception e) {
@@ -85,8 +85,8 @@ public class TestFcApi {
         FcApi api = new FcApi(API_KEY);
 
         try {
-            LatestResponse latestDefault = api.getLatest();
-            LatestResponse latestCadDef = api.getLatest(CurrencyList.CAD);
+            LatestResponse latestDefault = api.getWrapper().getLatest();
+            LatestResponse latestCadDef = api.getWrapper().getLatest(CurrencyList.CAD);
             System.out.println(latestDefault);
             System.out.println(latestCadDef);
             System.out.printf("EUR/USD: %f%n", latestDefault.getData().getEUR());

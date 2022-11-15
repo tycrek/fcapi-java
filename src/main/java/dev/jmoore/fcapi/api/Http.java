@@ -1,4 +1,4 @@
-package dev.jmoore.fcapi;
+package dev.jmoore.fcapi.api;
 
 import lombok.Cleanup;
 

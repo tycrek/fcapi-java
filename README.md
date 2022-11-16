@@ -32,20 +32,27 @@ dependencies {
 ```java
 FcApi api = new FcApi(API_KEY);
 
+// Top-level conversion function. BigDecimal is returned to ensure currency precision.
+// Doubles, Floats, and BigDecimal values are supported.
+BigDecimal converted1 = api.convert("CAD", "USD", 69.0D);
+BigDecimal converted2 = api.convert("CAD", "USD", 42.0f);
+BigDecimal converted3 = api.convert("CAD", "USD", new BigDecimal("100"));
+BigDecimal converted4 = api.convert(CurrencyList.EUR, CurrencyList.JPY, new BigDecimal("1457.25"));
+
 // Check account status
-StatusResponse status = api.getStatus();
+StatusResponse status = api.getWrapper().getStatus();
 
 // Get all currencies
-CurrenciesResponse currencies = api.getCurrencies();
+CurrenciesResponse currencies = api.getWrapper().getCurrencies();
 
 // Get specific currencies
-CurrenciesResponse currencies = api.getCurrencies(CurrencyList.AUD, CurrencyList.CAD, CurrencyList.EUR, CurrencyList.USD);
+CurrenciesResponse currencies = api.getWrapper().getCurrencies(CurrencyList.AUD, CurrencyList.CAD, CurrencyList.EUR, CurrencyList.USD);
 
 // Get latest exchange rates
-LatestResponse latest = api.getLatest();
+LatestResponse latest = api.getWrapper().getLatest();
 
 // Get specific latest exchange rates
-LatestResponse latestCadDef = api.getLatest(CurrencyList.CAD, CurrencyList.EUR);
+LatestResponse latestCadDef = api.getWrapper().getLatest(CurrencyList.CAD, CurrencyList.EUR);
 ```
 
 For information on endpoints, please refer to [freecurrencyapi Documentation](https://freecurrencyapi.com/docs).
@@ -54,7 +61,8 @@ For information on endpoints, please refer to [freecurrencyapi Documentation](ht
 
 - [ ] Caching
 - [ ] Historical
-- [ ] Helper functions
+- Helper functions
+   - [x] Convert
 
 [Image]: https://jitpack.io/v/tycrek/fcapi-java.svg?style=flat-square
 [Jitpack]: https://jitpack.io/#tycrek/fcapi-java/

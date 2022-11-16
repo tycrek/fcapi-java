@@ -56,7 +56,8 @@ public class FcApi {
 
     @SneakyThrows
     private double getRateWithReflection(LatestResponse.Rates rates, CurrencyCode to) {
-        // Don't worry about it
+        // I'm using reflection because it's much more clean and concise than switches/loops/etc.
+        // If you can find a more efficient method that isn't 50+ lines, please let me know in an Issue.
         var method = String.format("get%s", to.getCode());
         return (double) rates.getClass().getMethod(method).invoke(rates);
     }

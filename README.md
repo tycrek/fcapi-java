@@ -61,7 +61,7 @@ For information on endpoints, please refer to [freecurrencyapi Documentation](ht
 
 - [ ] Caching
 - [ ] Historical
-- Helper functions
+- [ ] Helper functions
    - [x] Convert
 
 [Image]: https://jitpack.io/v/tycrek/fcapi-java.svg?style=flat-square

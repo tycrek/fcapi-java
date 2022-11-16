@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -109,6 +110,19 @@ public class TestFcApi {
             System.out.printf("EUR/USD: %f%n", latestDefault.getData().getEUR());
             System.out.printf("EUR/CAD: %f%n", latestCadDef.getData().getEUR());
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testConvert() {
+        FcApi api = new FcApi(API_KEY);
+
+        try {
+            System.out.println(api.convert("CAD", "USD", 69.0D));
+            System.out.println(api.convert("CAD", "USD", 42.0f));
+            System.out.println(api.convert("CAD", "USD", new BigDecimal("100")));
+        } catch (IOException | InvalidCurrencyException e) {
             e.printStackTrace();
         }
     }
